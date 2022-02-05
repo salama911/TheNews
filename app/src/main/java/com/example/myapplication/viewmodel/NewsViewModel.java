@@ -36,6 +36,8 @@ public class NewsViewModel extends ViewModel {
                .subscribe(result->newsList.setValue((ArrayList<NewsModel>) result)
                        ,error-> Log.e("viewmodel",error.getMessage()) );
 
+       ///sasa
+
 
     }
 }
