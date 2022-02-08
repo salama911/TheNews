@@ -1,6 +1,7 @@
 package com.example.myapplication.repository;
 
-import com.example.myapplication.R;
+import com.example.myapplication.model.Credentials;
+import com.example.myapplication.model.NewsResponce;
 import com.example.myapplication.network.NewsApiService;
 
 import javax.inject.Inject;
@@ -15,8 +16,8 @@ public class Repository {
         this.newsApiService = newsApiService;
     }
 
-    public Observable<NewsApiService> getNews(){
-        return newsApiService.getNews("eg","f4de97aa77ca4dd692729ea3087f191e");
+    public Observable<NewsResponce> getNews(){
+        return newsApiService.getNews("us",Credentials.API_Key);
     }
 
 }

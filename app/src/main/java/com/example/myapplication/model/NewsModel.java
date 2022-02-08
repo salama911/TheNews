@@ -5,8 +5,7 @@ public class NewsModel {
     private String description;
     private String urlToImage;
 
-    public NewsModel() {
-    }
+
 
     public NewsModel(String title, String description, String urlToImage) {
         this.title = title;
