@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable-anydpi/ic_star_readlatter.xml" value="0.2611111111111111" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable/shadow_bac.xml" value="0.2657407407407407" />
-        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_item.xml" value="0.22" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_europe_item.xml" value="0.3375" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_item.xml" value="0.33" />
       </map>
     </option>
   </component>

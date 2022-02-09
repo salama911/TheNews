@@ -13,4 +13,7 @@ public interface NewsApiService {
             @Query("country") String country,
             @Query("apiKey") String apiKey
     );
+
+
+
 }

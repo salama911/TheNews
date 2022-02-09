@@ -6,7 +6,7 @@
 
     >
 
-    <gradient android:angle="0"
+    <gradient android:angle="180"
         android:endColor="@android:color/transparent"
         android:startColor="#000">
 

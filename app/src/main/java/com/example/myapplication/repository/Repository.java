@@ -16,8 +16,16 @@ public class Repository {
         this.newsApiService = newsApiService;
     }
 
+
+    //News Of Egypt
     public Observable<NewsResponce> getNews(){
-        return newsApiService.getNews("us",Credentials.API_Key);
+        return newsApiService.getNews("eg",Credentials.API_Key);
     }
+
+    //News of europe
+    public Observable<NewsResponce> getEuropeNews(){
+        return newsApiService.getNews("gb",Credentials.API_Key);
+    }
+
 
 }
