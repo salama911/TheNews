@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.example.myapplication.adapter.Adapter;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView , recyclerViewWorld;
     private Adapter adapter;
     private AdapterWorld adapterWorld;
-
+    private ImageView rlaterImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewWorld =findViewById(R.id.recycler_Worldnews);
         adapterWorld=new AdapterWorld(this);
         recyclerViewWorld.setAdapter(adapterWorld);
+
+      /*  rlaterImg =findViewById(R.id.star_read_latter);
+        rlaterImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "hi", Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
 
         getEgyNews();
