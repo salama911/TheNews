@@ -1,15 +1,19 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView , recyclerViewWorld;
     private Adapter adapter;
     private AdapterWorld adapterWorld;
-    private ImageView rlaterImg;
+    private Button rlaterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +51,18 @@ public class MainActivity extends AppCompatActivity {
         adapterWorld=new AdapterWorld(this);
         recyclerViewWorld.setAdapter(adapterWorld);
 
-      /*  rlaterImg =findViewById(R.id.star_read_latter);
-        rlaterImg.setOnClickListener(new View.OnClickListener() {
+
+        rlaterButton=findViewById(R.id.toreadlaterbtn);
+        rlaterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "hi", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,ReadLatterActivity.class));
             }
-        });*/
-
+        });
 
         getEgyNews();
         getEuroNews();
+       // setupSwip();
 
     }
 
@@ -88,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 }

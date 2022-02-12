@@ -3,10 +3,12 @@ package com.example.myapplication.adapter;
 import static com.example.myapplication.R.drawable.ic_star_readlatter;
 import static com.example.myapplication.R.drawable.ic_star_readlatteryellow;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.NewsModel;
+import com.example.myapplication.repository.Repository;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
@@ -31,6 +37,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     private Context mcontext;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private boolean isliked=false;
+
+    private NewsViewModel newsViewModel;
+
 
     public Adapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -53,25 +63,41 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 .load(newsList.get(position).getUrlToImage())
                 .into(holder.NewsImage);
 
-          sharedPreferences = mcontext.getSharedPreferences("imageColor", Context.MODE_PRIVATE);
-          editor = sharedPreferences.edit();
-          editor.putInt("color", ic_star_readlatteryellow);
-          editor.apply();
 
         holder.rlaterImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 sharedPreferences = mcontext.getSharedPreferences("imageColor", Context.MODE_PRIVATE);
-                int x=sharedPreferences.getInt("color", ic_star_readlatteryellow);
-                holder.rlaterImg.setBackgroundResource(x);
+
+                holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
+                NewsModel newsModelss=newsList.get(position);
+                newsViewModel.InsertAnew(newsModelss);
+                Toast.makeText(mcontext, " Added To Read Later List", Toast.LENGTH_SHORT).show();
+               /* if (isliked){
+                    holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
+                    sharedPreferences = mcontext.getSharedPreferences("imageColor", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putInt("color", ic_star_readlatteryellow);
+                    editor.apply();
+                    isliked=true;
+                }
+                else{
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mcontext);
+                    int x=sharedPref.getInt("color",0);
+                    holder.rlaterImg.setBackgroundResource(x);*/
 
             }
         });
 
 
-
-
     }
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        if(newsViewModel==null){
+            newsViewModel=new ViewModelProvider((ViewModelStoreOwner) recyclerView.getContext()).get(NewsViewModel.class);
+        }
+    }
+
 
     @Override
     public int getItemCount() {
@@ -89,10 +115,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     }
 
 
+
+
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Newstitle, NewsDescription;
         ImageView NewsImage;
-        ImageView rlaterImg;
+        ImageView rlaterImg,deleteitem;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -102,7 +132,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             NewsImage = itemView.findViewById(R.id.theNew_image);
             rlaterImg = itemView.findViewById(R.id.star_read_latter);
 
-
         }
     }
+
 }

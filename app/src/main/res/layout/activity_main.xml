@@ -55,14 +55,18 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gotoReadLatte"
-            android:id="@+id/toreadlaterbtn"
-            android:textColor="@color/cardview_dark_background"
-            android:layout_gravity="center"
-            />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="gotoReadLatte"
+               android:id="@+id/toreadlaterbtn"
+               android:textColor="@color/cardview_dark_background"
+               android:layout_gravity="center"
+               />
+
+
 
     </LinearLayout>
 

@@ -31,9 +31,9 @@ public class NewsViewModel extends ViewModel {
 
     public LiveData<List<NewsModel>>ReadLaterList=null;
 
-
-
-
+    public LiveData<List<NewsModel>> getReadLaterList() {
+        return ReadLaterList;
+    }
 
     public void getNews(){
         repository.getNews()
@@ -66,7 +66,8 @@ public class NewsViewModel extends ViewModel {
     }
 
     public void getReadlaterNews(){
-        repository.getRlatter();
+        ReadLaterList= repository.getRlatter();
+
     }
 
 }
