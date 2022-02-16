@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.adapter.Adapter;
+import com.example.myapplication.adapter.AdapterRlater;
 import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
@@ -27,7 +28,7 @@ public class ReadLatterActivity extends AppCompatActivity {
 
     private NewsViewModel favVmodel;
     private RecyclerView recyclerView ;
-    private Adapter adapter;
+    private AdapterRlater adapter;
     private Button tohome;
 
 
@@ -37,7 +38,7 @@ public class ReadLatterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_latter);
 
         recyclerView=findViewById(R.id.recyclerView_readlater);
-        adapter= new Adapter(this);
+        adapter= new AdapterRlater(this);
         recyclerView.setAdapter(adapter);
 
         tohome = findViewById(R.id.gotoHome);
