@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.adapter.Adapter;
 import com.example.myapplication.adapter.AdapterRlater;
+import com.example.myapplication.adapter.OnNewListener;
 import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
@@ -24,7 +25,7 @@ import java.util.List;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class ReadLatterActivity extends AppCompatActivity {
+public class ReadLatterActivity extends AppCompatActivity implements OnNewListener {
 
     private NewsViewModel favVmodel;
     private RecyclerView recyclerView ;
@@ -38,7 +39,7 @@ public class ReadLatterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_latter);
 
         recyclerView=findViewById(R.id.recyclerView_readlater);
-        adapter= new AdapterRlater(this);
+        adapter= new AdapterRlater(this,this);
         recyclerView.setAdapter(adapter);
 
         tohome = findViewById(R.id.gotoHome);
@@ -87,5 +88,16 @@ public class ReadLatterActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void OnNewClick(int position) {
+        Intent intent=new Intent(this,DetailsActivity.class);
+        intent.putExtra("RlaterNews",adapter.getSelectedMovie(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void OnEuroNewClick(int position) {
+
+    }
 }
 

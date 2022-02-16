@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.adapter.Adapter;
 import com.example.myapplication.adapter.AdapterWorld;
+import com.example.myapplication.adapter.OnNewListener;
 import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnNewListener  {
 
     private NewsViewModel newsViewModel,europeViewModel;
     private RecyclerView recyclerView , recyclerViewWorld;
@@ -44,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView =findViewById(R.id.recycler_egynews);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        adapter=new Adapter(this);
+        adapter=new Adapter(this,this);
         recyclerView.setAdapter(adapter);
 
         recyclerViewWorld =findViewById(R.id.recycler_Worldnews);
-        adapterWorld=new AdapterWorld(this);
+        adapterWorld=new AdapterWorld(this,this);
         recyclerViewWorld.setAdapter(adapterWorld);
 
 
@@ -95,6 +96,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void OnNewClick(int position) {
+        Intent intent=new Intent(this,DetailsActivity.class);
+        intent.putExtra("News",adapter.getSelectedMovie(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void OnEuroNewClick(int position) {
+        Intent intent=new Intent(this,DetailsActivity.class);
+        intent.putExtra("EuroNews",adapterWorld.getSelectedMovie(position));
+        startActivity(intent);
+    }
 
 
 }

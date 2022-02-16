@@ -1,14 +1,8 @@
 package com.example.myapplication.adapter;
 
-import static com.example.myapplication.R.drawable.ic_star_readlatter;
 import static com.example.myapplication.R.drawable.ic_star_readlatteryellow;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +13,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.NewsModel;
-import com.example.myapplication.repository.Repository;
 import com.example.myapplication.viewmodel.NewsViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,17 +30,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     private boolean isliked=false;
 
     private NewsViewModel newsViewModel;
+    private OnNewListener onNewListener;
 
-
-    public Adapter(Context mcontext) {
+    public Adapter(Context mcontext,OnNewListener onNewListener) {
         this.mcontext = mcontext;
+        this.onNewListener=onNewListener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false),onNewListener);
 
     }
 
@@ -114,24 +105,41 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     }
 
+    public NewsModel getSelectedMovie(int position){
+
+        if(newsList!=null){
+            if( newsList.size()>0){
+                return newsList.get(position);
+            }
+        }
+        return null;
+
+    }
 
 
-
-
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Newstitle, NewsDescription;
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView Newstitle;
         ImageView NewsImage;
-        ImageView rlaterImg,deleteitem;
+        ImageView rlaterImg;
+        OnNewListener onNewListener;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView,OnNewListener onNewListener) {
             super(itemView);
 
+            this.onNewListener=onNewListener;
             Newstitle = itemView.findViewById(R.id.news_title);
             NewsImage = itemView.findViewById(R.id.theNew_image);
             rlaterImg = itemView.findViewById(R.id.star_read_latter);
 
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            onNewListener.OnNewClick(getAdapterPosition());
         }
     }
 

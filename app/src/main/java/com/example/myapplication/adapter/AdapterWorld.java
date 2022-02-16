@@ -28,17 +28,18 @@ public class AdapterWorld extends RecyclerView.Adapter<AdapterWorld.MyViewHolder
     private List<NewsModel> newsList = new ArrayList<>();
     private Context mcontext;
     private NewsViewModel newsViewModel;
+    private OnNewListener onNewListener;
 
-
-    public AdapterWorld(Context mcontext) {
+    public AdapterWorld(Context mcontext , OnNewListener onNewListener) {
         this.mcontext = mcontext;
-    }
+        this.onNewListener=onNewListener;
+            }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_europe_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_europe_item, parent, false),onNewListener);
 
     }
 
@@ -84,30 +85,44 @@ public class AdapterWorld extends RecyclerView.Adapter<AdapterWorld.MyViewHolder
         notifyDataSetChanged();
     }
 
-    /*public Pockemon getPockemonAt(int position){
-        return pockemonList.get(position);
+    public NewsModel getSelectedMovie(int position){
 
-    }*/
+        if(newsList!=null){
+            if( newsList.size()>0){
+                return newsList.get(position);
+            }
+        }
+        return null;
+
+    }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Newstitle,NewsDescription;
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView Newstitle;
         ImageView NewsImage;
         ImageView star;
+        OnNewListener onNewListener;
 
 
 
-
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,OnNewListener onNewListener) {
             super(itemView);
 
+
+            this.onNewListener=onNewListener;
             Newstitle = itemView.findViewById(R.id.news_title);
             NewsImage = itemView.findViewById(R.id.news_euro_image);
             star = itemView.findViewById(R.id.yellow_star_euro);
 
 
+        itemView.setOnClickListener(this);
+
+        }
 
 
+        @Override
+        public void onClick(View v) {
+            onNewListener.OnEuroNewClick(getAdapterPosition());
         }
     }
 }

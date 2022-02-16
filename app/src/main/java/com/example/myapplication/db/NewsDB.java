@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.myapplication.model.NewsModel;
 
-@Database(entities = NewsModel.class,version =1,exportSchema = false )
+@Database(entities = NewsModel.class,version =2,exportSchema = false )
 public abstract class NewsDB extends RoomDatabase {
 
     public abstract Dao dao();

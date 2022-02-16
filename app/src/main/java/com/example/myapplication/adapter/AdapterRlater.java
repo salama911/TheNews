@@ -29,16 +29,18 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
     private Context mcontext;
     private NewsViewModel newsViewModel;
 
+    private OnNewListener onNewListener;
 
-    public AdapterRlater(Context mcontext) {
+    public AdapterRlater(Context mcontext,OnNewListener onNewListener) {
         this.mcontext = mcontext;
+        this.onNewListener=onNewListener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rlater_news_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rlater_news_item, parent, false),onNewListener);
 
     }
 
@@ -62,7 +64,16 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
         }
     }
 
+    public NewsModel getSelectedMovie(int position){
 
+        if(newsList!=null){
+            if( newsList.size()>0){
+                return newsList.get(position);
+            }
+        }
+        return null;
+
+    }
     @Override
     public int getItemCount() {
         return newsList.size();
@@ -83,17 +94,26 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
 
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Newstitle, NewsDescription;
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView Newstitle;
         ImageView NewsImage;
+        OnNewListener onNewListener;
 
-
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,OnNewListener onNewListener) {
             super(itemView);
+
+            this.onNewListener=onNewListener;
 
             Newstitle = itemView.findViewById(R.id.news_title);
             NewsImage = itemView.findViewById(R.id.theNew_image);
 
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            onNewListener.OnNewClick(getAdapterPosition());
         }
     }
 
