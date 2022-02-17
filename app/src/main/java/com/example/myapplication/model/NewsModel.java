@@ -18,13 +18,13 @@ public class NewsModel implements Parcelable {
     private String url;
 
 
-
-
-    public NewsModel(int id, String title, String description, String urlToImage,String publishedAt,String url) {
+    public NewsModel(int id, String title, String description, String urlToImage, String publishedAt, String url) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.url = url;
     }
 
     protected NewsModel(Parcel in) {

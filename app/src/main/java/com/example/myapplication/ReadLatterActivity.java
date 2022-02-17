@@ -29,7 +29,7 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
 
     private NewsViewModel favVmodel;
     private RecyclerView recyclerView ;
-    private AdapterRlater adapter;
+    private AdapterRlater adapterR;
     private Button tohome;
 
 
@@ -39,8 +39,8 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
         setContentView(R.layout.activity_read_latter);
 
         recyclerView=findViewById(R.id.recyclerView_readlater);
-        adapter= new AdapterRlater(this,this);
-        recyclerView.setAdapter(adapter);
+        adapterR= new AdapterRlater(this,this);
+        recyclerView.setAdapter(adapterR);
 
         tohome = findViewById(R.id.gotoHome);
         tohome.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,8 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
         favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
             @Override
             public void onChanged(List<NewsModel> newsModels) {
-                adapter.setList(newsModels);
-                adapter.notifyDataSetChanged();
+                adapterR.setList(newsModels);
+                adapterR.notifyDataSetChanged();
             }
         });
     }
@@ -75,9 +75,9 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
                 int swipedPokemonPosition =viewHolder.getAdapterPosition();
-                NewsModel swipedPokemon=adapter.getNewsAt(swipedPokemonPosition);
+                NewsModel swipedPokemon=adapterR.getNewsAt(swipedPokemonPosition);
                 favVmodel.DaleteAnew(swipedPokemon.getTitle());
-                adapter.notifyDataSetChanged();
+                adapterR.notifyDataSetChanged();
                 Toast.makeText(ReadLatterActivity.this, "Deleted From Read Later List ", Toast.LENGTH_SHORT).show();
 
 
@@ -90,14 +90,19 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
 
     @Override
     public void OnNewClick(int position) {
-        Intent intent=new Intent(this,DetailsActivity.class);
-        intent.putExtra("RlaterNews",adapter.getSelectedMovie(position));
-        startActivity(intent);
+
     }
 
     @Override
     public void OnEuroNewClick(int position) {
 
+    }
+
+    @Override
+    public void OnRlaterNewClick(int position) {
+        Intent intent=new Intent(this,DetailsActivity.class);
+        intent.putExtra("RlaterNews",adapterR.getSelectedMovie(position));
+        startActivity(intent);
     }
 }
 

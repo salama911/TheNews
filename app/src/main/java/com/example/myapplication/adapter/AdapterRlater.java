@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
+import com.example.myapplication.ReadLatterActivity;
 import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
@@ -64,16 +65,7 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
         }
     }
 
-    public NewsModel getSelectedMovie(int position){
 
-        if(newsList!=null){
-            if( newsList.size()>0){
-                return newsList.get(position);
-            }
-        }
-        return null;
-
-    }
     @Override
     public int getItemCount() {
         return newsList.size();
@@ -89,8 +81,26 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
 
     }
 
+    public NewsModel getSelectedMovie(int position){
 
+        if(newsList!=null){
+            if( newsList.size()>0){
+                return newsList.get(position);
+            }
+        }
+        return null;
 
+    }
+    public String getSelectedurl(int position){
+
+        if(newsList!=null){
+            if( newsList.size()>0){
+                return newsList.get(position).getUrl();
+            }
+        }
+        return null;
+
+    }
 
 
 
@@ -113,7 +123,7 @@ public class AdapterRlater extends RecyclerView.Adapter<AdapterRlater.MyViewHold
 
         @Override
         public void onClick(View v) {
-            onNewListener.OnNewClick(getAdapterPosition());
+            onNewListener.OnRlaterNewClick(getAdapterPosition());
         }
     }
 

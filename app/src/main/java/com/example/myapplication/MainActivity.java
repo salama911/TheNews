@@ -110,5 +110,10 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
         startActivity(intent);
     }
 
+    @Override
+    public void OnRlaterNewClick(int position) {
+
+    }
+
 
 }

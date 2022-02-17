@@ -1,9 +1,13 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,12 +15,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.model.NewsModel;
+import com.example.myapplication.viewmodel.NewsViewModel;
+
+import java.util.List;
+import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
     private ImageView reportimg;
     private TextView reporttitl, reportreleasedate, reportdescription;
     private Button continuewReadinbtn;
+    private String link;
+    private NewsViewModel favVmodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +42,9 @@ public class DetailsActivity extends AppCompatActivity {
         continuewReadinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(DetailsActivity.this,WebPage.class);
+                intent.putExtra("link",link);
+                startActivity(intent);
             }
         });
 
@@ -54,12 +66,14 @@ public class DetailsActivity extends AppCompatActivity {
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
             reportdescription.setMovementMethod(new ScrollingMovementMethod());
-
-
-            // description.setMovementMethod(new ScrollingMovementMethod());
             Glide.with(this)
                     .load(newsModel.getUrlToImage())
                     .into(reportimg);
+
+            link= newsModel.getUrl();
+            Log.d("tagE", "onCreate: "+link);
+
+
 
         }
 
@@ -73,10 +87,13 @@ public class DetailsActivity extends AppCompatActivity {
             reporttitl.setText(newsModel.getTitle());
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
-            // description.setMovementMethod(new ScrollingMovementMethod());
             Glide.with(this)
                     .load(newsModel.getUrlToImage())
                     .into(reportimg);
+
+            link= newsModel.getUrl();
+            Log.d("tagu", "onCreate: "+link);
+
 
         }
 
@@ -90,12 +107,18 @@ public class DetailsActivity extends AppCompatActivity {
             reporttitl.setText(newsModel.getTitle());
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
-            // description.setMovementMethod(new ScrollingMovementMethod());
             Glide.with(this)
                     .load(newsModel.getUrlToImage())
                     .into(reportimg);
 
+           link= newsModel.getUrl();
+           Log.d("tagr", "onCreate: "+link);
+
         }
+
+
+
+
 
     }
 }
