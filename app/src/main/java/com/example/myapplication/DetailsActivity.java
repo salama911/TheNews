@@ -53,7 +53,10 @@ public class DetailsActivity extends AppCompatActivity {
             reporttitl.setText(newsModel.getTitle());
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
-           // description.setMovementMethod(new ScrollingMovementMethod());
+            reportdescription.setMovementMethod(new ScrollingMovementMethod());
+
+
+            // description.setMovementMethod(new ScrollingMovementMethod());
             Glide.with(this)
                     .load(newsModel.getUrlToImage())
                     .into(reportimg);

@@ -4,6 +4,9 @@
     <string name="top_head_in_egypt">Top Head In Egypt</string>
     <string name="top_news_in_europe">Top News In Europe</string>
     <string name="read_latter_news">Read Latter News</string>
+    <string name="continue_reading">continue reading ....</string>
+    <string name="details">details</string>
+    <string name="release_date">release date</string>
 
 
 </resources>
