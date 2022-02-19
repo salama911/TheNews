@@ -7,10 +7,11 @@
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable-anydpi/ic_star_deleteitem.xml" value="0.24166666666666667" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable-anydpi/ic_star_readlatter.xml" value="0.2611111111111111" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable-anydpi/ic_star_readlatteryellow.xml" value="0.24351851851851852" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable/btn_back.xml" value="0.24166666666666667" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/drawable/shadow_bac.xml" value="0.2657407407407407" />
-        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_details.xml" value="0.33" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_details.xml" value="0.2874251497005988" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_read_latter.xml" value="0.3375" />
+        <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/activity_read_latter.xml" value="0.26519337016574585" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_europe_item.xml" value="0.33" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_item.xml" value="0.33" />
         <entry key="..\:/TestsProjects/NewsApp/app/src/main/res/layout/news_item_read_later.xml" value="0.3323076923076923" />

@@ -25,28 +25,35 @@ import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements OnNewListener  {
+    private NewsViewModel favVmodel;
 
     private NewsViewModel newsViewModel,europeViewModel;
     private RecyclerView recyclerView , recyclerViewWorld;
     private Adapter adapter;
     private AdapterWorld adapterWorld;
     private Button rlaterButton;
+    ArrayList<NewsModel>roomlist=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get roomed data and passingit to adapter to use it later for make star colored
+        favVmodel =new ViewModelProvider(this).get(NewsViewModel.class);
+        favVmodel.getReadlaterNews();
+
 
         recyclerView =findViewById(R.id.recycler_egynews);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        adapter=new Adapter(this,this);
-        recyclerView.setAdapter(adapter);
+
 
         recyclerViewWorld =findViewById(R.id.recycler_Worldnews);
         adapterWorld=new AdapterWorld(this,this);
@@ -65,7 +72,22 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
         getEuroNews();
        // setupSwip();
 
+
+
+        favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
+            @Override
+            public void onChanged(List<NewsModel> newsModels) {
+                roomlist= (ArrayList<NewsModel>) newsModels;
+                Log.d("tagroom","list"+roomlist);
+                adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
+                recyclerView.setAdapter(adapter);
+
+            }
+        });
+
     }
+
+
 
     private void getEgyNews(){
         newsViewModel =new ViewModelProvider(this).get(NewsViewModel.class);

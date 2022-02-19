@@ -56,16 +56,15 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
-
-           <Button
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="gotoReadLatte"
-               android:id="@+id/toreadlaterbtn"
-               android:textColor="@color/cardview_dark_background"
-               android:layout_gravity="center"
-               />
-
+        <Button
+            android:id="@+id/toreadlaterbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:text="goto read later News"
+            android:backgroundTint="#FFDC5C5C"
+            />
 
 
     </LinearLayout>

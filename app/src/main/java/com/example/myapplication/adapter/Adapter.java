@@ -2,7 +2,7 @@ package com.example.myapplication.adapter;
 
 import static com.example.myapplication.R.drawable.ic_star_readlatteryellow;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,16 +26,16 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     private List<NewsModel> newsList = new ArrayList<>();
     private Context mcontext;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    private boolean isliked=false;
+
 
     private NewsViewModel newsViewModel;
     private OnNewListener onNewListener;
+    private ArrayList<NewsModel>roomlist;
 
-    public Adapter(Context mcontext,OnNewListener onNewListener) {
+    public Adapter(Context mcontext, OnNewListener onNewListener, ArrayList<NewsModel> roomlist) {
         this.mcontext = mcontext;
         this.onNewListener=onNewListener;
+        this.roomlist=roomlist;
     }
 
     @NonNull
@@ -62,22 +63,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
                 NewsModel newsModelss=newsList.get(position);
                 newsViewModel.InsertAnew(newsModelss);
+
                 Toast.makeText(mcontext, " Added To Read Later List", Toast.LENGTH_SHORT).show();
-               /* if (isliked){
-                    holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
-                    sharedPreferences = mcontext.getSharedPreferences("imageColor", Context.MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
-                    editor.putInt("color", ic_star_readlatteryellow);
-                    editor.apply();
-                    isliked=true;
+
+
                 }
-                else{
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mcontext);
-                    int x=sharedPref.getInt("color",0);
-                    holder.rlaterImg.setBackgroundResource(x);*/
+
+        });
+        for (int i=0;i<roomlist.size();i++){
+            if(roomlist.get(i).getTitle().equals(newsList.get(position).getTitle())){
+                holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
+
 
             }
-        });
+        }
+        Log.d("room", "onBindViewHolder: "+roomlist);
+
+
+
 
 
     }

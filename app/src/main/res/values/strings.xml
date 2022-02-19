@@ -7,6 +7,8 @@
     <string name="continue_reading">continue reading ....</string>
     <string name="details">details</string>
     <string name="release_date">release date</string>
+    <string name="gotoreadlatte">gotoReadLatte</string>
+    <string name="gotothome">GototHome</string>
 
 
 </resources>
