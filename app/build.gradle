@@ -83,6 +83,11 @@ dependencies {
     //sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
+
+    //matrial design
+    implementation 'com.google.android.material:material:1.6.0-alpha01'
+   // annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
 }
 
 

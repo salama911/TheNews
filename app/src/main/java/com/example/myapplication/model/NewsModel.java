@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity(tableName = "ReadLatter_table")
 public class NewsModel implements Parcelable {
     @PrimaryKey(autoGenerate = true)
@@ -123,4 +125,6 @@ public class NewsModel implements Parcelable {
                 ", url='" + url + '\'' +
                 '}';
     }
+
+
 }

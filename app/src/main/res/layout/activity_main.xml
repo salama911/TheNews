@@ -6,27 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:text="@string/top_head_in_egypt"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:fontFamily="serif"
-            android:textColor="#193893"
-            android:layout_margin="@dimen/_8sdp"
-            />
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:fontFamily="serif"
+                android:text="@string/top_head_in_egypt"
+                android:textColor="#193893"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#FFDC5C5C"
+                android:text="Search"
+                android:id="@+id/searchAnew"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_egynews"
@@ -52,8 +67,7 @@
             android:id="@+id/recycler_Worldnews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
 
         <Button
@@ -61,10 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@android:color/white"
-            android:text="goto read later News"
             android:backgroundTint="#FFDC5C5C"
-            />
+            android:text="goto read later News"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>

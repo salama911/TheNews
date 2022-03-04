@@ -31,14 +31,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements OnNewListener  {
-    private NewsViewModel favVmodel;
+    //private NewsViewModel favVmodel;
 
     private NewsViewModel newsViewModel,europeViewModel;
     private RecyclerView recyclerView , recyclerViewWorld;
     private Adapter adapter;
     private AdapterWorld adapterWorld;
-    private Button rlaterButton;
+    private Button rlaterButton ,searchAnew;
     ArrayList<NewsModel>roomlist=new ArrayList<>();
+
 
 
     @Override
@@ -46,15 +47,38 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //get roomed data and passingit to adapter to use it later for make star colored
-        favVmodel =new ViewModelProvider(this).get(NewsViewModel.class);
+
+        searchAnew=findViewById(R.id.searchAnew);
+        searchAnew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,SearchActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+       /* favVmodel =new ViewModelProvider(this).get(NewsViewModel.class);
         favVmodel.getReadlaterNews();
-
-
+*/
         recyclerView =findViewById(R.id.recycler_egynews);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
+        recyclerView.setAdapter(adapter);
+
+        //get roomed data and passingit to adapter to use it later for make star colored
 
 
+       /* favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
+            @Override
+            public void onChanged(List<NewsModel> newsModels) {
+                roomlist= (ArrayList<NewsModel>) newsModels;
+                Log.d("tagroom","list"+roomlist);
+                 adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
+                 recyclerView.setAdapter(adapter);
+
+            }
+        });
+*/
         recyclerViewWorld =findViewById(R.id.recycler_Worldnews);
         adapterWorld=new AdapterWorld(this,this);
         recyclerViewWorld.setAdapter(adapterWorld);
@@ -73,17 +97,8 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
        // setupSwip();
 
 
+        //get roomed data and passingit to adapter to use it later for make star colored
 
-        favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
-            @Override
-            public void onChanged(List<NewsModel> newsModels) {
-                roomlist= (ArrayList<NewsModel>) newsModels;
-                Log.d("tagroom","list"+roomlist);
-                adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
-                recyclerView.setAdapter(adapter);
-
-            }
-        });
 
     }
 
