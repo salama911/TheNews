@@ -32,7 +32,7 @@ public class Repository {
     Application application;
 
 
-   // RetrieveMovieRunnable retrieveMovieRunnable;
+    //RetrieveMovieRunnable retrieveMovieRunnable;
 
     @Inject
     public Repository(NewsApiService newsApiService,Dao dao) {
@@ -41,7 +41,7 @@ public class Repository {
     }
 
     //search
-    public MutableLiveData<ArrayList<NewsModel>> searchAnewlist = new MutableLiveData<>();
+   // public MutableLiveData<ArrayList<NewsModel>> searchAnewlist = new MutableLiveData<>();
 
     public Repository(Application application) {
         this.application=application;
@@ -59,9 +59,9 @@ public class Repository {
         return newsApiService.getNews("gb",Credentials.API_Key);
     }
 
-    //News Of Egypt
+    //search
     public Observable<NewsResponce> searchNews(String query){
-        return newsApiService.searchAnew(query,"2022-02-02","publishedAt",Credentials.API_Key);
+        return newsApiService.searchAnew(query,"2022-02-20","publishedAt",Credentials.API_Key);
     }
 
 
@@ -79,8 +79,8 @@ public class Repository {
 //https://newsapi.org/v2/everything?q=tesla&from=2022-02-02
 // &sortBy=publishedAt&apiKey=f4de97aa77ca4dd692729ea3087f191e
 
-    /*//Search A news
-
+    //Search A news
+/*
     public void searchAnew(String query){
         if (retrieveMovieRunnable!=null){
             retrieveMovieRunnable=null;
@@ -148,8 +148,8 @@ public class Repository {
             cancelRequet=true;
 
         }
-    }
-*/
+    }*/
+
 
 }
 

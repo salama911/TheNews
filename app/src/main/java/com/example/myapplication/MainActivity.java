@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -107,14 +108,17 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
     private void getEgyNews(){
         newsViewModel =new ViewModelProvider(this).get(NewsViewModel.class);
 
-        newsViewModel.getNews();
+       newsViewModel.getNews();
 
         newsViewModel.newsList.observe(this, new Observer<ArrayList<NewsModel>>() {
             @Override
             public void onChanged(ArrayList<NewsModel> newsModels) {
                 adapter.setList(newsModels);
+                Log.v("tags","searched News"+newsModels);
+
 
             }
+
         });
     }
 
@@ -151,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
     public void OnRlaterNewClick(int position) {
 
     }
+
+
+
 
 
 }

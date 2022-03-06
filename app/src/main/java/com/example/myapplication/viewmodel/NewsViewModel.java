@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.hilt.lifecycle.ViewModelInject;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.myapplication.model.NewsModel;
 import com.example.myapplication.repository.Repository;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +24,15 @@ public class NewsViewModel extends ViewModel {
     public Application application;
 
     @ViewModelInject
-    public NewsViewModel(Repository repository) {
+    public NewsViewModel(Repository repository, Application application) {
         this.repository = repository;
+        this.application=application;
     }
+
+    public NewsViewModel(Application application) {
+
+    }
+
     public void init(Application application){
         repository = new Repository(application);
         //mAllWords = repository.getAllWords();
@@ -43,7 +47,9 @@ public class NewsViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<NewsModel>> searchAnewlist = new MutableLiveData<>();
 
-
+//    public MutableLiveData<ArrayList<NewsModel>> getSearchAnewlist() {
+//          return searchAnewlist;
+//    }
 
     public LiveData<List<NewsModel>> getReadLaterList() {
         return ReadLaterList;
@@ -71,7 +77,7 @@ public class NewsViewModel extends ViewModel {
 
     }
 
-    public void searrchNews(String query) {
+   public void getsearchedNews(String query) {
         repository.searchNews(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -81,12 +87,13 @@ public class NewsViewModel extends ViewModel {
 
     }
 
-
-  /*  public void searchAnew(String query) {
-        mQuery=query;
-        repository.searchAnew(mQuery);
+    /*public List searchAnew(String query) {
+        mQuery = query;
+       repository.searchAnew(mQuery);
 
     }*/
+
+
 
 
     public void InsertAnew(NewsModel newsModel) {
@@ -102,4 +109,24 @@ public class NewsViewModel extends ViewModel {
 
     }
 
+
+   /* public static class MyViewModelFactory implements ViewModelProvider.Factory {
+        private Application mApplication;
+
+
+        public MyViewModelFactory(Application application) {
+            mApplication = application;
+
+        }
+
+        @Override
+        public <T extends ViewModel> T create(Class<T> modelClass) {
+            return (T) new NewsViewModel(mApplication);
+        }
+
+
+    }*/
 }
+ /*
+
+    }*/
