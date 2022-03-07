@@ -16,9 +16,6 @@
             android:name=".SearchActivity2"
             android:exported="true" />
         <activity
-            android:name=".SearchActivity"
-            android:exported="true" />
-        <activity
             android:name=".WebPage"
             android:exported="false" />
         <activity

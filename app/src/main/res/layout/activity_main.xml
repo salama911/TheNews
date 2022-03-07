@@ -36,6 +36,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="#FFDC5C5C"
                 android:text="Search"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:id="@+id/searchAnew"
                 android:textColor="@android:color/white" />
 

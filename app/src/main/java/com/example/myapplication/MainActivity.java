@@ -156,8 +156,10 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
 
     }
 
+    @Override
+    public void OnSearchedNewClick(int position) {
 
-
+    }
 
 
 }

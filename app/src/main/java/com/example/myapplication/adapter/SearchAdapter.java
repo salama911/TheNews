@@ -24,11 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
-    private List<NewsModel> newsList = new ArrayList<>();
+    private List<NewsModel> searchednewsList = new ArrayList<>();
     private Context mcontext;
-
-
-    private NewsViewModel newsViewModel;
     private OnNewListener onNewListener;
 
     public SearchAdapter(Context mcontext, OnNewListener onNewListener) {
@@ -41,18 +38,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_europe_item, parent, false),onNewListener);
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.searched_news_item, parent, false),onNewListener);
 
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.Newstitle.setText(newsList.get(position).getTitle());
+        holder.serchedNewstitle.setText(searchednewsList.get(position).getTitle());
 
         Glide.with(mcontext)
-                .load(newsList.get(position).getUrlToImage())
-                .into(holder.NewsImage);
+                .load(searchednewsList.get(position).getUrlToImage())
+                .into(holder.searchedNewsImage);
 
 
     }
@@ -67,24 +64,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return newsList.size();
+        return searchednewsList.size();
     }
 
     public void setList(List<NewsModel> modelList) {
-        this.newsList = modelList;
+        this.searchednewsList = modelList;
         notifyDataSetChanged();
     }
 
     public NewsModel getNewsAt(int position) {
-        return newsList.get(position);
+        return searchednewsList.get(position);
 
     }
 
     public NewsModel getSelectedMovie(int position){
 
-        if(newsList!=null){
-            if( newsList.size()>0){
-                return newsList.get(position);
+        if(searchednewsList!=null){
+            if( searchednewsList.size()>0){
+                return searchednewsList.get(position);
             }
         }
         return null;
@@ -93,9 +90,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView Newstitle;
-        ImageView NewsImage;
-        ImageView rlaterImg;
+        TextView serchedNewstitle;
+        ImageView searchedNewsImage;
+        ImageView searchednewsstar;
         OnNewListener onNewListener;
 
 
@@ -104,9 +101,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             super(itemView);
 
             this.onNewListener=onNewListener;
-            Newstitle = itemView.findViewById(R.id.news_title);
-            NewsImage = itemView.findViewById(R.id.theNew_image);
-            rlaterImg = itemView.findViewById(R.id.star_read_latter);
+            serchedNewstitle = itemView.findViewById(R.id.searched_news_title);
+            searchedNewsImage = itemView.findViewById(R.id.searched_news_image);
+            searchednewsstar = itemView.findViewById(R.id.searched_news_star);
 
             itemView.setOnClickListener(this);
         }
@@ -114,7 +111,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         @Override
         public void onClick(View v) {
-            onNewListener.OnNewClick(getAdapterPosition());
+            onNewListener.OnSearchedNewClick(getAdapterPosition());
         }
     }
 

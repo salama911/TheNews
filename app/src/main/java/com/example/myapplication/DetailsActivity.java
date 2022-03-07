@@ -33,17 +33,17 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        reportimg=findViewById(R.id.reportimg);
-        reporttitl=findViewById(R.id.headline);
-        reportreleasedate=findViewById(R.id.release_date);
-        reportdescription=findViewById(R.id.report_details);
+        reportimg = findViewById(R.id.reportimg);
+        reporttitl = findViewById(R.id.headline);
+        reportreleasedate = findViewById(R.id.release_date);
+        reportdescription = findViewById(R.id.report_details);
 
-        continuewReadinbtn=findViewById(R.id.continue_reading);
+        continuewReadinbtn = findViewById(R.id.continue_reading);
         continuewReadinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DetailsActivity.this,WebPage.class);
-                intent.putExtra("link",link);
+                Intent intent = new Intent(DetailsActivity.this, WebPage.class);
+                intent.putExtra("link", link);
                 startActivity(intent);
             }
         });
@@ -51,17 +51,16 @@ public class DetailsActivity extends AppCompatActivity {
         GetDataFromIntent();
         GetDataFromEuroIntent();
         GetDataFromRlaterIntent();
+        GetDataFromSearchedIntent();
 
     }
 
 
-
     private void GetDataFromIntent() {
 
-        if(getIntent().hasExtra("News"))
-        {
+        if (getIntent().hasExtra("News")) {
 
-            NewsModel newsModel=getIntent().getParcelableExtra("News");
+            NewsModel newsModel = getIntent().getParcelableExtra("News");
             reporttitl.setText(newsModel.getTitle());
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
@@ -70,20 +69,59 @@ public class DetailsActivity extends AppCompatActivity {
                     .load(newsModel.getUrlToImage())
                     .into(reportimg);
 
-            link= newsModel.getUrl();
-            Log.d("tagE", "onCreate: "+link);
-
+            link = newsModel.getUrl();
+            Log.d("tagE", "onCreate: " + link);
 
 
         }
 
     }
+
     private void GetDataFromEuroIntent() {
 
-        if(getIntent().hasExtra("EuroNews"))
+        if (getIntent().hasExtra("EuroNews")) {
+
+            NewsModel newsModel = getIntent().getParcelableExtra("EuroNews");
+            reporttitl.setText(newsModel.getTitle());
+            reportdescription.setText(newsModel.getDescription());
+            reportreleasedate.setText(newsModel.getPublishedAt());
+            Glide.with(this)
+                    .load(newsModel.getUrlToImage())
+                    .into(reportimg);
+
+            link = newsModel.getUrl();
+            Log.d("tagu", "onCreate: " + link);
+
+
+        }
+
+    }
+
+    private void GetDataFromRlaterIntent() {
+
+        if (getIntent().hasExtra("RlaterNews")) {
+
+            NewsModel newsModel = getIntent().getParcelableExtra("RlaterNews");
+            reporttitl.setText(newsModel.getTitle());
+            reportdescription.setText(newsModel.getDescription());
+            reportreleasedate.setText(newsModel.getPublishedAt());
+            Glide.with(this)
+                    .load(newsModel.getUrlToImage())
+                    .into(reportimg);
+
+            link = newsModel.getUrl();
+            Log.d("tagr", "onCreate: " + link);
+
+        }
+
+
+    }
+    private void GetDataFromSearchedIntent() {
+
+        if(getIntent().hasExtra("searchedNews"))
         {
 
-            NewsModel newsModel=getIntent().getParcelableExtra("EuroNews");
+            NewsModel newsModel=getIntent().getParcelableExtra("searchedNews");
             reporttitl.setText(newsModel.getTitle());
             reportdescription.setText(newsModel.getDescription());
             reportreleasedate.setText(newsModel.getPublishedAt());
@@ -92,27 +130,7 @@ public class DetailsActivity extends AppCompatActivity {
                     .into(reportimg);
 
             link= newsModel.getUrl();
-            Log.d("tagu", "onCreate: "+link);
-
-
-        }
-
-    }
-    private void GetDataFromRlaterIntent() {
-
-        if(getIntent().hasExtra("RlaterNews"))
-        {
-
-            NewsModel newsModel=getIntent().getParcelableExtra("RlaterNews");
-            reporttitl.setText(newsModel.getTitle());
-            reportdescription.setText(newsModel.getDescription());
-            reportreleasedate.setText(newsModel.getPublishedAt());
-            Glide.with(this)
-                    .load(newsModel.getUrlToImage())
-                    .into(reportimg);
-
-           link= newsModel.getUrl();
-           Log.d("tagr", "onCreate: "+link);
+            Log.d("tagsearcheddetails", "onCreate: "+link);
 
         }
 

@@ -104,5 +104,10 @@ public class ReadLatterActivity extends AppCompatActivity implements OnNewListen
         intent.putExtra("RlaterNews",adapterR.getSelectedMovie(position));
         startActivity(intent);
     }
+
+    @Override
+    public void OnSearchedNewClick(int position) {
+
+    }
 }
 
