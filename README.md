@@ -7,9 +7,10 @@ News App provides you with the Top news in Egypt and Europe
 <br/>-MVVM
 <br/>-Room
 <br/>-RepositoryPattern
-<br/>-RxJava,
+<br/>-RxJava
 <br/>-Glide
 <br/>-RecyclerView
 
-https://user-images.githubusercontent.com/44526915/154741209-a0245f00-81ae-4558-bdb2-d835b6545f07.mp4
+
+https://user-images.githubusercontent.com/44526915/158048519-b4924477-00c6-495a-8d96-d0b06df1f252.mp4
 
