@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements OnNewListener  {
-    //private NewsViewModel favVmodel;
+    private NewsViewModel favVmodel;
 
     private NewsViewModel newsViewModel,europeViewModel;
     private RecyclerView recyclerView , recyclerViewWorld;
@@ -58,28 +58,24 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
             }
         });
 
-       /* favVmodel =new ViewModelProvider(this).get(NewsViewModel.class);
+        favVmodel =new ViewModelProvider(this).get(NewsViewModel.class);
         favVmodel.getReadlaterNews();
-*/
+
         recyclerView =findViewById(R.id.recycler_egynews);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
         recyclerView.setAdapter(adapter);
 
-        //get roomed data and passingit to adapter to use it later for make star colored
-
-
-       /* favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
+       // get roomed data and passingit to adapter to use it later for make star colored
+        favVmodel.getReadLaterList().observe(this, new Observer<List<NewsModel>>() {
             @Override
             public void onChanged(List<NewsModel> newsModels) {
                 roomlist= (ArrayList<NewsModel>) newsModels;
                 Log.d("tagroom","list"+roomlist);
                  adapter=new Adapter(getApplicationContext(),MainActivity.this,roomlist);
-                 recyclerView.setAdapter(adapter);
-
             }
         });
-*/
+
         recyclerViewWorld =findViewById(R.id.recycler_Worldnews);
         adapterWorld=new AdapterWorld(this,this);
         recyclerViewWorld.setAdapter(adapterWorld);
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
        // setupSwip();
 
 
-        //get roomed data and passingit to adapter to use it later for make star colored
+        //get roomed data and passing it to adapter to use it later for make star colored
 
 
     }
@@ -114,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnNewListener  {
             @Override
             public void onChanged(ArrayList<NewsModel> newsModels) {
                 adapter.setList(newsModels);
+                recyclerView.setAdapter(adapter);
                 Log.v("tags","searched News"+newsModels);
 
 

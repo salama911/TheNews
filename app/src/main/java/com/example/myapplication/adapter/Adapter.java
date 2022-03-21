@@ -1,5 +1,6 @@
 package com.example.myapplication.adapter;
 
+import static com.example.myapplication.R.drawable.ic_euro_star_default_color;
 import static com.example.myapplication.R.drawable.ic_star_readlatteryellow;
 import android.content.Context;
 import android.util.Log;
@@ -60,25 +61,30 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
 
-                holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
-                NewsModel newsModelss=newsList.get(position);
-                newsViewModel.InsertAnew(newsModelss);
-
-                Toast.makeText(mcontext, " Added To Read Later List", Toast.LENGTH_SHORT).show();
-
-
+                if(roomlist.isEmpty()){
+                    holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
+                    NewsModel newsModelss=newsList.get(position);
+                    newsViewModel.InsertAnew(newsModelss);
+                    Toast.makeText(mcontext, " Added To Read Later List", Toast.LENGTH_SHORT).show();
+                }else {
+                    for (int i = 0; i < roomlist.size(); i++) {
+                        if (roomlist.get(i).getTitle().equals(newsList.get(position).getTitle())) {
+                            Toast.makeText(mcontext, "Removed From Database", Toast.LENGTH_SHORT).show();
+                            newsViewModel.DaleteAnew(roomlist.get(i).getTitle());
+                            holder.rlaterImg.setBackgroundResource(R.drawable.ic_star_readlatter);
+                        }
+                    }
                 }
+            }
 
         });
+
+
         for (int i=0;i<roomlist.size();i++){
             if(roomlist.get(i).getTitle().equals(newsList.get(position).getTitle())){
                 holder.rlaterImg.setBackgroundResource(ic_star_readlatteryellow);
             }
         }
-
-
-
-
 
     }
     @Override
